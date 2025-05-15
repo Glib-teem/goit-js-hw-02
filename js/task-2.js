@@ -1,15 +1,18 @@
-function getShippingMessage(country, price, deliveryFee) {
-  // рахуємо товар + доставку
-  const totalPrice = price + deliveryFee;
-
-  // шаблонне речення (країна + загальна вартість)
-  const message = `Shipping to ${country} will cost ${totalPrice} credits`;
-
-  // повертаємо повідомлення
-  return message;
+function formatMessage(message, maxLength) {
+  // Перевіряємо довжину рядка
+  if (message.length <= maxLength) {
+    // Якщо довжина менша або дорівнює maxLength, повертаємо початковий рядок
+    return message;
+  } else {
+    // Якщо довжина перевищує maxLength, обрізаємо рядок і додаємо трикрапку
+    return message.slice(0, maxLength) + '...';
+  }
 }
 
-// для ментора (проблеми тільки з гітом, локально працює)
-console.log(getShippingMessage('Australia', 120, 50)); // Очікуємо: "Shipping to Australia will cost 170 credits"
-console.log(getShippingMessage('Germany', 80, 20)); // Очікуємо: "Shipping to Germany will cost 100 credits"
-console.log(getShippingMessage('Sweden', 100, 20)); // Очікуємо: "Shipping to Sweden will cost 120 credits"
+// для ментора
+console.log(formatMessage('Curabitur ligula sapien', 16)); // "Curabitur ligula..."
+console.log(formatMessage('Curabitur ligula sapien', 23)); // "Curabitur ligula sapien"
+console.log(formatMessage('Vestibulum facilisis purus nec', 20)); // "Vestibulum facilisis..."
+console.log(formatMessage('Vestibulum facilisis purus nec', 30)); // "Vestibulum facilisis purus nec"
+console.log(formatMessage('Nunc sed turpis a felis in nunc fringilla', 15)); // "Nunc sed turpis..."
+console.log(formatMessage('Nunc sed turpis a felis in nunc fringilla', 41)); // "Nunc sed turpis a felis in nunc fringilla"
